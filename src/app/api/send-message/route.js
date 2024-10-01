@@ -1,8 +1,11 @@
 import messageModel from "@/app/models/messageSchema";
+import dbConnect from "@/app/lib/databaseConnection";
 
 export async function POST(request) {
-  try {
-    const { firstName, lastName, email, message, phone } = await request.body;
+  try { 
+    
+    await dbConnect()
+    const { firstName, lastName, email, message, phone } = await request.json();
 
     if (!firstName || !lastName || !email || !message || !phone) {
       return Response.json(
@@ -33,7 +36,7 @@ export async function POST(request) {
     console.log("error while sending message: ", error);
 
     return Response.json(
-      {
+      { 
         success: "false",
         message: "Error sending message: ",
       },
