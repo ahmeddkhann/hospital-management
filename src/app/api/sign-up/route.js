@@ -12,7 +12,7 @@ export async function POST (request){
             return Response.json(
                {
                   success: "false",
-                  message: "Please fill all the forms"
+                  message: "Please fill all the forms to signup"
                },
                {status: 402}
             )
