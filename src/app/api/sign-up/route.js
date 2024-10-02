@@ -1,7 +1,9 @@
+import dbConnect from "@/app/lib/databaseConnection"
 import userModel from "@/app/models/userSchema"
 
 
 export async function POST (request){
+   await dbConnect()
     const {firstName, lastName, email, phone,
          password, gender, dob, cnic, role} = await request.json()
 
