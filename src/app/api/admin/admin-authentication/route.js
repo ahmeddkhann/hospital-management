@@ -1,10 +1,9 @@
 import dbConnect from "@/app/lib/databaseConnection"
 import userModel from "@/app/models/userSchema"
 import bcrypt from "bcrypt"
-export async function isAdminAuthentic (request){
+export async function POST (request){
     try {
       await dbConnect()
-  
       const {email, password, role} = await request.json()
   
       if (!email || !password, !role){
