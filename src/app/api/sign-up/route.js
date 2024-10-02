@@ -23,7 +23,7 @@ export async function POST (request){
             return Response.json(
                {
                   success: "false",
-                  message: "User with this email already exists! Please try again with new email"
+                  message: `${role} with email ${email} already exists! Please try again with new email`
                },
                {status: 401}
             )
@@ -42,7 +42,6 @@ export async function POST (request){
          })
 
          await newUser.save()
-
          return Response.json(
             {
                success: "true",
