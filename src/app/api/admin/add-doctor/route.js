@@ -22,7 +22,7 @@ export async function POST(request) {
             return Response.json(
                 {
                     success: false,
-                    message: `Doctor with email ${email} is already registered`
+                    message: `${isRegistered.role} with email ${email} is already registered`
                 },
                 { status: 403 }
             );
