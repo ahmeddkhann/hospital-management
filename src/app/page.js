@@ -2,66 +2,6 @@
 import Image from 'next/image';
 import doctorImage from '../../images/doctorImage.png';
 import hospitalBiographyImage from '../../images/hospitalBiography.jpeg';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import urologyImage from '../../images/urology.jpeg';
-import cardiologyImage from '../../images/cardiology.jpeg';
-import dermatologyImage from '../../images/dermatology.jpeg';
-import gastroenterologyImage from '../../images/gastroentrology.jpeg';
-import endocrinologyImage from '../../images/endocrinology.jpeg';
-import orthopedicsImage from '../../images/orthopedics.jpeg';
-import oncologyImage from '../../images/oncology.jpeg';
-import gynecologyImage from '../../images/gynecology.jpeg';
-import neurologyImage from '../../images/neurlogy.jpeg';
-import pediatricsImage from "../../images/pediatrics.jpeg";
-import radiologyImage from "../../images/radiology.jpeg";
-import PsychiatryImage from "../../images/psychatiry.jpeg";
-
-// Example Department Data
-const departments = [
-  {
-    name: "Cardiology",
-    details: "Expert care for heart-related conditions.",
-    image: cardiologyImage,
-  },
-  {
-    name: "Pediatrics",
-    details: "Specialized healthcare for children.",
-    image: pediatricsImage,
-  },
-  {
-    name: "Orthopedics",
-    details: "Treatment of musculoskeletal issues.",
-    image: orthopedicsImage,
-  },
-  {
-    name: "Neurology",
-    details: "Comprehensive care for neurological conditions.",
-    image: neurologyImage,
-  },
-
-  {
-    name: "Radiology",
-    details: "Advanced imaging and diagnostic services.",
-    image: radiologyImage,
-  },
-
-  {
-    name: "Gynecology",
-    details: "Women’s health and reproductive services.",
-    image: gynecologyImage,
-  },
-  {
-    name: "Endocrinology",
-    details: "Hormonal and metabolic health.",
-    image: endocrinologyImage,
-  },
-  {
-    name: "Urology",
-    details: "Urinary tract and male reproductive health.",
-    image: urologyImage,
-  },
-];
 
 export default function Home() {
   return (
@@ -112,8 +52,8 @@ export default function Home() {
 
           {/* Biography Text on the Right */}
           <div className="md:w-1/2 text-left px-4">
-            <h1 className="text-3xl font-bold text-blue-600 mb-4">Our Story</h1>
-            <h3 className="text-xl font-semibold text-gray-800 mb-6">Who We Are</h3>
+            <h1 className="text-3xl font-bold text-blue-600 mb-4">Our Biography</h1>
+            <h3 className="text-xl font-semibold text-green-600 mb-6">Who We Are</h3>
 
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               <span className="font-semibold text-blue-500">EverCare Medical Centre</span> has been a trusted provider of world-class healthcare for over two decades. From our humble beginnings, we have grown into a state-of-the-art facility known for innovation and excellence in patient care.
@@ -130,26 +70,44 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Departments Section */}
-<div className="mt-28">
-  <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">Our Departments</h2>
-  <div className="flex flex-wrap justify-center md:justify-between">
-    {departments.map((dept, index) => (
-      <div key={index} className="flex flex-col items-center mb-4 w-full sm:w-1/2 md:w-1/4 lg:w-1/4">
-        <Image
-          src={dept.image}
-          alt={dept.name}
-          className="rounded-lg shadow-lg mb-4"
-          width={250}
-          height={150}
-          objectFit="cover"
-        />
-        <h3 className="text-xl font-semibold text-green-600 mb-2">{dept.name}</h3>
-        <p className="text-gray-700 text-center">{dept.details}</p>
-      </div>
-    ))}
-  </div>
-</div>
+                {/* Services Section */}
+                <div className="flex flex-col items-center justify-center mt-16">
+          <h1 className="text-3xl font-bold text-blue-600 mb-6">Our Healthcare Services</h1>
+          
+          <div className="md:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+            {/* Service 1 */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-green-600 mb-4">Primary Care</h2>
+              <p className="text-gray-700 leading-relaxed">
+                Comprehensive primary care services focused on maintaining your health with preventive checkups, diagnosis, and personalized treatment plans.
+              </p>
+            </div>
+
+            {/* Service 2 */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-green-600 mb-4">Specialized Treatments</h2>
+              <p className="text-gray-700 leading-relaxed">
+                From cardiology to oncology, our specialists provide advanced treatments for a wide range of complex medical conditions, ensuring you receive the best care possible.
+              </p>
+            </div>
+
+            {/* Service 3 */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-green-600 mb-4">Surgical Procedures</h2>
+              <p className="text-gray-700 leading-relaxed">
+                Our state-of-the-art surgical department offers a full range of inpatient and outpatient procedures, with a focus on safety and successful outcomes.
+              </p>
+            </div>
+
+            {/* Service 4 */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-green-600 mb-4">Wellness Programs</h2>
+              <p className="text-gray-700 leading-relaxed">
+                We offer holistic wellness programs that include fitness plans, dietary consultations, and stress management, promoting a balanced and healthy lifestyle.
+              </p>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
