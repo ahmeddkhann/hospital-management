@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -13,8 +14,8 @@ export default function SignUp() {
   const [dob, setDob] = useState("");
   const [cnic, setCnic] = useState("");
   const [role, setRole] = useState("");
-  
-  const { toast } = useToast();  // Access the toast function
+
+  const { toast } = useToast(); // Access the toast function
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -54,7 +55,8 @@ export default function SignUp() {
       // Show error toast on failed signup
       toast({
         title: "Sign Up Failed",
-        description: "There was an error creating your account. Please try again.",
+        description:
+          "There was an error creating your account. Please try again.",
         status: "error", // Use the error style from shadcn
       });
     }
@@ -164,9 +166,10 @@ export default function SignUp() {
               <option value="" disabled>
                 Select Role
               </option>
-              <option value="patient">Patient</option>
-              <option value="doctor">Doctor</option>
-              <option value="admin">Admin</option>
+              <option value="patient">patient</option>
+              <option value="doctor">doctor</option>
+              <option value="admin">admin</option>
+
             </select>
 
             {/* Submit Button */}
@@ -176,6 +179,17 @@ export default function SignUp() {
             >
               Sign Up
             </button>
+            <div className="flex flex-col items-center mt-8">
+              <h1 className="text-lg font-medium text-gray-700 mb-4">
+                Already have an account?
+              </h1>
+              <Link
+                href="/login"
+                className="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500 transition duration-300"
+              >
+                LogIn
+              </Link>
+            </div>
           </form>
         </div>
       </div>
