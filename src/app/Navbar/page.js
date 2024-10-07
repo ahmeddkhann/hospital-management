@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link href="/departments" className="hover:text-gray-300">Departments</Link>
           <Link href="/appointment" className="hover:text-gray-300">Appointment</Link>
           <Link href="/send-message" className="hover:text-gray-300">Feedback</Link>
-          <Link href="/admin" className="hover:text-gray-300">Admin</Link>
+          <Link href="/adminPanel" className="hover:text-gray-300">Admin</Link>
         </div>
       </div>
 
