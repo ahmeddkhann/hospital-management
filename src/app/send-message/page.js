@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const MessageForm = () => {
     const [firstName, setFirstName] = useState("")
@@ -9,9 +11,30 @@ const MessageForm = () => {
     const [phone, setPhone] = useState("")
     const [message, setMessage] = useState("")
 
-    const handleMessage = (e) => {
+    const handleMessage = async (e) => {
         e.preventDefault()
-        // Add form submission logic here (if any)
+        
+      try {
+          await axios.post("/api/send-message", 
+              {firstName, lastName, email, phone, message},
+              {
+                  withCredentials: true,
+                  headers: {
+                      'Content-Type': 'application/json',
+                  }
+              }
+          ).then(res => {
+              toast.success(res.data.message);
+              setFirstName("");
+              setLastName("");
+              setEmail("");
+              setPhone("");
+              setMessage("");
+          })
+      } catch (error) {
+  
+      }
+   
     }
 
     return (
