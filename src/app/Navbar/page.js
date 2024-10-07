@@ -40,8 +40,7 @@ export default function Navbar() {
         <div className="hidden md:flex space-x-6 text-white">
           <Link href="/" className="hover:text-gray-300">Home</Link>
           <Link href="/departments" className="hover:text-gray-300">Departments</Link>
-          <Link href="/send-message" className="hover:text-gray-300">Contact</Link>
-          <Link href="/signup" className="hover:text-gray-300">Signup</Link>
+          <Link href="/send-message" className="hover:text-gray-300">Send Us Message</Link>
           <Link href="/admin" className="hover:text-gray-300">Admin</Link>
         </div>
       </div>

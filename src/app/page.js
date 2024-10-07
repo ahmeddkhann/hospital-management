@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import doctorImage from '../../images/doctorImage.png';
 import hospitalBiographyImage from '../../images/hospitalBiography.jpeg';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
           <div className="md:w-1/2 text-left mb-6 md:mb-0">
             <h1 className="text-4xl font-bold text-blue-600 mb-10">
               Welcome to <br /> EverCare Medical Centre <br />
-              <span className='text-green-600'>Your Trusted Healthcare Provider</span>
+              <span className="text-green-600">Your Trusted Healthcare Provider</span>
             </h1>
             <p className="text-gray-700 text-lg leading-relaxed">
               <span className="font-semibold text-blue-600">EverCare Medical Centre</span> is a <span className="italic">state-of-the-art facility</span> dedicated to providing <span className="text-blue-500 font-medium">comprehensive healthcare services</span> with compassion and expertise.
@@ -70,8 +71,8 @@ export default function Home() {
           </div>
         </div>
 
-                {/* Services Section */}
-                <div className="flex flex-col items-center justify-center mt-16">
+        {/* Services Section */}
+        <div className="flex flex-col items-center justify-center mt-16">
           <h1 className="text-3xl font-bold text-blue-600 mb-6">Our Healthcare Services</h1>
           
           <div className="md:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
@@ -109,7 +110,20 @@ export default function Home() {
           </div>
         </div>
 
-      </div>
+        {/* Login and Signup Section */}
+        <div className="flex flex-col items-center justify-center mt-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-4">Join Us Today</h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Already have an account? <span className="font-semibold text-blue-600">Log in</span> or create a new account to access our services and stay updated.
+          </p>
+
+          <div className="flex space-x-4">
+
+          <Link href="/login" className="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500 transition duration-300">LogIn</Link>
+          <Link href="/signup" className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500 transition duration-300">signUp</Link>
+          </div>
+        </div>
+      </div>  
     </div>
   );
 }

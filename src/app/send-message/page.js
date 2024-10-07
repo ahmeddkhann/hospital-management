@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import { useToast } from '@/hooks/use-toast'
 
 const MessageForm = () => {
     const [firstName, setFirstName] = useState("")
@@ -10,6 +10,8 @@ const MessageForm = () => {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [message, setMessage] = useState("")
+
+    const {toast} = useToast()
 
     const handleMessage = async (e) => {
         e.preventDefault()
@@ -24,7 +26,12 @@ const MessageForm = () => {
                   }
               }
           ).then(res => {
-              toast.success(res.data.message);
+            toast({
+                title: "Message Sent",
+                description: res.data.message,
+                variant: "success", 
+                duration: 4000,
+            });
               setFirstName("");
               setLastName("");
               setEmail("");
@@ -32,7 +39,13 @@ const MessageForm = () => {
               setMessage("");
           })
       } catch (error) {
-  
+        toast({
+            title: "Error",
+            description: "Failed to send message. Please try again.",
+            variant: "destructive", // For error variant
+            duration: 4000,
+        });
+        console.error(error)
       }
    
     }
