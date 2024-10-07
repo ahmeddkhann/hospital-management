@@ -205,14 +205,14 @@ export default function Appointment() {
                 <option value="" disabled>
                   Doctor First Name
                 </option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedics">Orthopedicsr</option>
-                <option value="Neurology">Neurology</option>
-                <option value="Radiology">Radiology</option>
-                <option value="Gynecology">Gynecology</option>
-                <option value="Endocrinology">Endocrinology </option>
-                <option value="Urology">Urology</option>
+                <option value="Ahmed">Ahmed</option>
+                <option value="Yahya">Yahya</option>
+                <option value="Waseem">Waseem</option>
+                <option value="Qadir">Qadir</option>
+                <option value="Maryam">Maryam</option>
+                <option value="Wania">Wania</option>
+                <option value="Jamal">Jamal </option>
+                <option value="Habibullah">Habibullah</option>
               </select>
 
             {/* Doctor's Last Name */}
@@ -225,14 +225,14 @@ export default function Appointment() {
                 <option value="" disabled>
                   Doctor Last Name
                 </option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedics">Orthopedicsr</option>
-                <option value="Neurology">Neurology</option>
-                <option value="Radiology">Radiology</option>
-                <option value="Gynecology">Gynecology</option>
-                <option value="Endocrinology">Endocrinology </option>
-                <option value="Urology">Urology</option>
+                <option value="Ahmed">Ahmed</option>
+                <option value="Khan">Khan</option>
+                <option value="Haider">Haider</option>
+                <option value="Qadir">Qadir</option>
+                <option value="Hassan">Hassan</option>
+                <option value="Jaffar">Jaffar</option>
+                <option value="Bhatti ">Bhatti </option>
+                <option value="Butt">Butt</option>
               </select>
 
             {/* Has Visited Before */}
