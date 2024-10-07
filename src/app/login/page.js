@@ -103,7 +103,7 @@ export default function Login() {
             </button>
             <div className="flex flex-col items-center mt-8">
               <h1 className="text-lg font-medium text-gray-700 mb-4">
-                Don't have an account? Sign Up
+              Don&apos;t have an account? Sign Up
               </h1>
               <Link
                 href="/signup"
