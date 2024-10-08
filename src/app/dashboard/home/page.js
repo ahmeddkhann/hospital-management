@@ -26,11 +26,7 @@ const WelcomeMessage = () => {
           </div>
           <div className="bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition duration-300 flex flex-col items-center p-4">
             <FaEnvelope className="text-3xl mb-2" />
-            <a href="/messages" className="text-lg">Check Messages</a>
-          </div>
-          <div className="bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition duration-300 flex flex-col items-center p-4">
-            <FaUserShield className="text-3xl mb-2" />
-            <a href="/admin" className="text-lg">Admin Panel</a>
+            <a href="/dashboard/check-messages" className="text-lg">Check Messages</a>
           </div>
           <div className="bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition duration-300 flex flex-col items-center p-4">
             <FaSignOutAlt className="text-3xl mb-2" />

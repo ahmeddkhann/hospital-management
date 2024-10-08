@@ -25,17 +25,9 @@ const Sidebar = () => {
             </p>
           </Link>
         </li>
-        <li>
-          <Link href="/admin">
-            <p className="flex items-center space-x-3">
-              <i className="fas fa-user-shield"></i>
-              <span>Admin</span>
-            </p>
-          </Link>
-        </li>
         {/* Messages Section */}
         <li>
-          <Link href="/messages">
+          <Link href="/dashboard/check-messages">
             <p className="flex items-center space-x-3">
               <i className="fas fa-envelope"></i>
               <span>Messages</span>
