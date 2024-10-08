@@ -1,6 +1,7 @@
 "use client";
 // pages/manage-appointments.js
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ManageAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -12,16 +13,21 @@ const ManageAppointments = () => {
     // Fetch appointments data from the API
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('/api/get-appointments'); // Ensure this matches your backend route
-        const data = await response.json();
+        console.log("Fetching appointments...");
+        const response = await axios.get('/api/admin/get-appointments'); // Ensure this matches your backend route
+        const data = response.data; // Use this instead of response.json()
 
-        if (response.ok) {
+        if (response.status === 200) {
           setAppointments(data.getMessages); // Set appointments data to state
         } else {
           setError(data.message || "Error fetching appointments");
         }
       } catch (error) {
-        setError("Failed to fetch appointments");
+        if (error.response) {
+          setError(error.response.data.message || "Failed to fetch appointments");
+        } else {
+          setError("Failed to fetch appointments");
+        }
       } finally {
         setLoading(false); // Hide loading state once the fetch is done
       }
@@ -75,10 +81,15 @@ const ManageAppointments = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {appointments.map((appointment) => (
               <div key={appointment._id} className="bg-white border border-gray-200 rounded-lg shadow-lg p-6">
-                <h3 className="text-xl font-semibold text-gray-800">Appointment with: {appointment.email}</h3>
-                <p className="text-gray-600">Status: {appointment.status}</p>
-                <p className="text-gray-600">Date: {new Date(appointment.date).toLocaleDateString()}</p>
-                <p className="text-gray-600">Time: {new Date(appointment.date).toLocaleTimeString()}</p>
+                <span className='font-semibold'>Patient:</span>
+                <h3 className="text-xl font-semibold text-gray-800"> {appointment.firstName} {appointment.lastName} </h3>
+                <span className='font-semibold'>Doctor:</span>
+                <h3 className="text-xl font-semibold text-gray-800"> {appointment.doctor.firstName} {appointment.doctor.lastName} </h3>
+                <p className="text-lg font-semibold text-gray-600">Email: {appointment.email}</p>
+                <p className="text-lg font-semibold text-gray-600">Department: {appointment.department}</p>
+                <p className="text-gray-600 font-semibold">Status: {appointment.status}</p>
+                <p className="text-gray-600 font-semibold">Date: {appointment.date}</p> {/* Formatting date */}
+                <p className="text-lg font-semibold text-gray-600">Has Visited Before? {appointment.hasVisited ? "Yes" : "No"}</p> {/* Displaying boolean as Yes/No */}
                 <button
                   onClick={() => updateAppointmentStatus(appointment.email, appointment.status)}
                   className="mt-4 bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 transition duration-300"
@@ -99,4 +110,3 @@ const ManageAppointments = () => {
 };
 
 export default ManageAppointments;
-

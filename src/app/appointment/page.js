@@ -25,7 +25,7 @@ export default function Appointment() {
   const handleAppointment = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/post-appointments", {
+      const response = await axios.post("/api/post-appointment", {
         firstName,
         lastName,
         email,
@@ -157,8 +157,8 @@ export default function Appointment() {
                 <option value="" disabled>
                   Select Gender
                 </option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
                 <option value="Other">Other</option>
               </select>
      
@@ -167,7 +167,7 @@ export default function Appointment() {
             <div className="flex flex-col mt-4">
               <span className="text-gray-700 mb-1">Appointment Date:</span>
               <input
-                type="date"
+                type="text"
                 value={appointmentDate}
                 onChange={(e) => setAppointmentDate(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -197,8 +197,8 @@ export default function Appointment() {
 
             {/* Doctor's First Name */}
             <select
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={doctorFirstName}
+                onChange={(e) => setDoctorFirstName(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
@@ -217,8 +217,8 @@ export default function Appointment() {
 
             {/* Doctor's Last Name */}
             <select
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={doctorLastName}
+                onChange={(e) => setDoctorLastName(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
