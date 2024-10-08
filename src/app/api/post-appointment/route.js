@@ -35,7 +35,7 @@ try {
                     success: false,
                     message: "Doctor with above details is not found"
                 },
-                {status: 404}
+                {status: 403}
             )
         }
     
@@ -57,7 +57,7 @@ try {
                     success: false,
                     message: `patient with email ${email} is not found. Please logIn first`
                 },
-                {status: 404}
+                {status: 402}
             )
         }
         const patientId = patient._id

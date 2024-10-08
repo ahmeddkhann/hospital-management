@@ -25,7 +25,7 @@ export default function Appointment() {
   const handleAppointment = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/appointments", {
+      const response = await axios.post("/api/post-appointments", {
         firstName,
         lastName,
         email,
@@ -187,7 +187,7 @@ export default function Appointment() {
                 </option>
                 <option value="Cardiology">Cardiology</option>
                 <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedics">Orthopedicsr</option>
+                <option value="Orthopedic">Orthopedic</option>
                 <option value="Neurology">Neurology</option>
                 <option value="Radiology">Radiology</option>
                 <option value="Gynecology">Gynecology</option>
@@ -205,7 +205,7 @@ export default function Appointment() {
                 <option value="" disabled>
                   Doctor First Name
                 </option>
-                <option value="Ahmed">Ahmed</option>
+                <option value="ahmed">ahmed</option>
                 <option value="Yahya">Yahya</option>
                 <option value="Waseem">Waseem</option>
                 <option value="Qadir">Qadir</option>
@@ -226,7 +226,7 @@ export default function Appointment() {
                   Doctor Last Name
                 </option>
                 <option value="Ahmed">Ahmed</option>
-                <option value="Khan">Khan</option>
+                <option value="khan">khan</option>
                 <option value="Haider">Haider</option>
                 <option value="Qadir">Qadir</option>
                 <option value="Hassan">Hassan</option>

@@ -1,11 +1,14 @@
-import React from 'react'
+// pages/admin.js
+import Sidebar from "./sidebar/page";
+import WelcomeMessage from "./home/page";
 
-const page = () => {
+const AdminPage = () => {
   return (
-    <div>
-      This is user dashboard
+    <div className="flex">
+      <Sidebar />
+      <WelcomeMessage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default AdminPage;
