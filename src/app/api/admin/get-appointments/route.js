@@ -1,54 +1,39 @@
-import appointmentModel from "@/app/models/appoitmentSchema";
+
+import appointmentModel from "@/app/models/appoitmentSchema"
 import dbConnect from "@/app/lib/databaseConnection";
 
-export async function GET() {
-    // Establish a database connection
-    try {
-        await dbConnect();
-    } catch (error) {
-        console.error("Database connection failed:", error);
-        return Response.json(
-            {
-                success: false,
-                message: "Database connection failed",
-            },
-            { status: 500 }
-        );
+export default async function handler(req, res) {
+    // Handle only GET requests
+    if (req.method !== 'GET') {
+        return res.status(405).json({
+            success: false,
+            message: "Method not allowed",
+        });
     }
 
+    // Establish a database connection
+    await dbConnect();
+
     try {
-        // Retrieve appointments from the database
         const getMessages = await appointmentModel.find();
 
-        // Check if any appointments were retrieved
         if (!getMessages || getMessages.length === 0) {
-            return Response.json(
-                {
-                    success: false,
-                    message: "No Appointments found",
-                },
-                { status: 404 }
-            );
+            return res.status(404).json({
+                success: false,
+                message: "No Appointments found",
+            });
         }
 
-        // Return the appointments if found
-        return Response.json(
-            {
-                success: true,
-                status: 200,
-                message: "Appointments retrieved successfully",
-                data: getMessages, // Changed key to 'data' for clarity
-            },
-            { status: 200 }
-        );
+        return res.status(200).json({
+            success: true,
+            message: "Appointments retrieved successfully",
+            data: getMessages,
+        });
     } catch (error) {
         console.error("Error while retrieving appointments:", error);
-        return Response.json(
-            {
-                success: false,
-                message: "Error while retrieving appointments",
-            },
-            { status: 500 }
-        );
+        return res.status(500).json({
+            success: false,
+            message: "Error while retrieving appointments",
+        });
     }
 }
