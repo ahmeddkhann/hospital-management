@@ -1,5 +1,5 @@
 // components/WelcomeMessage.js
-import { FaCalendarCheck, FaUserMd, FaEnvelope, FaUserShield, FaSignOutAlt } from 'react-icons/fa'; // Import icons
+import { FaCalendarCheck, FaUserMd, FaEnvelope, FaUserShield, FaSignOutAlt, FaUserPlus } from 'react-icons/fa'; // Import icons
 
 const WelcomeMessage = () => {
   return (
@@ -22,15 +22,19 @@ const WelcomeMessage = () => {
           </div>
           <div className="bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition duration-300 flex flex-col items-center p-4">
             <FaUserMd className="text-3xl mb-2" />
-            <a href="/dashboard/doctors" className="text-lg"> Available Doctors</a>
+            <a href="/dashboard/doctors" className="text-lg">Available Doctors</a>
           </div>
           <div className="bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition duration-300 flex flex-col items-center p-4">
+            <FaUserPlus className="text-3xl mb-2" /> {/* New icon for adding doctor */}
+            <a href="/dashboard/add-doctor" className="text-lg">Add New Doctor</a>
+          </div>
+          <div className="bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600 transition duration-300 flex flex-col items-center p-4">
             <FaEnvelope className="text-3xl mb-2" />
             <a href="/dashboard/check-messages" className="text-lg">Check Messages</a>
           </div>
           <div className="bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition duration-300 flex flex-col items-center p-4">
             <FaSignOutAlt className="text-3xl mb-2" />
-            <a href="/logout" className="text-lg">Logout</a>
+            <a href="/dashboard/logout" className="text-lg">Logout</a>
           </div>
         </div>
       </div>

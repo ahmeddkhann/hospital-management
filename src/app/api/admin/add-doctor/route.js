@@ -38,7 +38,7 @@ export async function POST(request) {
             dob,
             cnic,
             doctorDepartment,
-            role: "Doctor",
+            role: "doctor",
         });
 
         await doctor.save();
