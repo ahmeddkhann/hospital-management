@@ -11,23 +11,28 @@ const ManageAppointments = () => {
   const [updateMessage, setUpdateMessage] = useState(null);
 
   useEffect(() => {
-    // Fetch appointments data from the API
     const fetchAppointments = async () => {
       try {
         console.log("Fetching appointments...");
-        const response = await axios.get("/api/admin/get-appointments"); 
-        const data = response.data; // Use this instead of response.json()
+        
+        // Set a timeout for the API call
+        const response = await axios.get("/api/admin/get-appointments", {
+          timeout: 5000, // 5 seconds timeout
+        });
 
         if (response.status === 200) {
-          setAppointments(data.getMessages); // Set appointments data to state
+          setAppointments(response.data.getMessages); // Set appointments data to state
         } else {
-          setError(data.message || "Error fetching appointments");
+          setError(response.data.message || "Error fetching appointments");
         }
       } catch (error) {
+        // Improved error handling
         if (error.response) {
           setError(
             error.response.data.message || "Failed to fetch appointments"
           );
+        } else if (error.code === "ECONNABORTED") {
+          setError("Request timed out. Please try again later.");
         } else {
           setError("Failed to fetch appointments");
         }
@@ -118,19 +123,17 @@ const ManageAppointments = () => {
                   Status: {appointment.status}
                 </p>
                 <p className="text-gray-600 font-semibold">
-                  Date: {appointment.appointment_date}
-                </p>{" "}
-                {/* Formatting date */}
+                  Date: {new Date(appointment.appointment_date).toLocaleDateString()} {/* Formatting date */}
+                </p>
                 <p className="text-lg font-semibold text-gray-600">
                   Has Visited Before? {appointment.hasVisited ? "Yes" : "No"}
-                </p>{" "}
-                {/* Displaying boolean as Yes/No */}
-                <Link href={"/dashboard/appointments/updateStatus"}>
+                </p>
+                <Link href={`/dashboard/appointments/updateStatus?email=${appointment.email}`}>
                   <button className="mt-4 bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 transition duration-300">
                     Update Status
                   </button>
                 </Link>
-                <Link href={"/dashboard/appointments/delete"}>
+                <Link href={`/dashboard/appointments/delete?email=${appointment.email}`}>
                   <button className="mt-4 bg-red-500 text-white rounded-lg py-2 px-4 hover:bg-red-600 transition duration-300">
                     Delete Appointment
                   </button>
