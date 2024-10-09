@@ -1,4 +1,4 @@
-import appointmentModel from "@/app/models/appointmentSchema"; // Corrected typo: appoitmentSchema
+import appointmentModel from "@/app/models/appoitmentSchema";// Corrected typo: appoitmentSchema
 import dbConnect from "@/app/lib/databaseConnection";
 import { NextResponse } from "next/server"; // Import NextResponse
 
