@@ -12,11 +12,11 @@ const ManageAppointments = () => {
     const fetchAppointments = async () => {
       try {
         console.log("Fetching appointments...");
-        const response = await axios.get("/api/admin/get-appointments"); 
-        const data = response.data; 
+        const response = await axios.get("/api/admin/get-appointments");
+        const data = response.data;
 
         if (response.status === 200) {
-          setAppointments(data.getMessages); 
+          setAppointments(data.getMessages);
         } else {
           setError(data.message || "Error fetching appointments");
         }
@@ -29,14 +29,12 @@ const ManageAppointments = () => {
           setError("Failed to fetch appointments");
         }
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchAppointments();
   }, []);
-
- 
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
@@ -50,7 +48,6 @@ const ManageAppointments = () => {
         )}
         {error && <p className="text-center text-red-500 text-lg">{error}</p>}
 
-
         {!loading && !error && appointments.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {appointments.map((appointment) => (
@@ -63,11 +60,19 @@ const ManageAppointments = () => {
                   {" "}
                   {appointment.firstName} {appointment.lastName}{" "}
                 </h3>
-                <span className="font-semibold">Doctor:</span>
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {" "}
-                  {appointment.doctor.firstName} {appointment.doctor.lastName}{" "}
-                </h3>
+                {appointment.doctor ? (
+                  <div>
+                    <span className="font-semibold">Doctor:</span>
+                    <h3 className="text-xl font-semibold text-gray-800">
+                      {appointment.doctor.firstName}{" "}
+                      {appointment.doctor.lastName}
+                    </h3>
+                  </div>
+                ) : (
+                  <p className="text-red-500">
+                    Doctor information not available
+                  </p>
+                )}
                 <p className="text-lg font-semibold text-gray-600">
                   Email: {appointment.email}
                 </p>
@@ -86,18 +91,14 @@ const ManageAppointments = () => {
                 </p>{" "}
                 {/* Displaying boolean as Yes/No */}
                 <Link href={"/dashboard/appointments/updateStatus"}>
-                <button
-                  className="mt-4 bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 transition duration-300"
-                >
-                  Update Status
-                </button>
+                  <button className="mt-4 bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 transition duration-300">
+                    Update Status
+                  </button>
                 </Link>
                 <Link href={"/dashboard/appointments/delete"}>
-                <button
-                  className="mt-4 bg-red-500 text-white rounded-lg py-2 px-4 hover:bg-red-600 transition duration-300"
-                >
-                  Delete Appointment
-                </button>
+                  <button className="mt-4 bg-red-500 text-white rounded-lg py-2 px-4 hover:bg-red-600 transition duration-300">
+                    Delete Appointment
+                  </button>
                 </Link>
               </div>
             ))}
@@ -116,7 +117,6 @@ const ManageAppointments = () => {
               Back to Home
             </p>
           </Link>
-          
         </div>
       </div>
     </div>
