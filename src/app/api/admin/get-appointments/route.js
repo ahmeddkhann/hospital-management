@@ -2,11 +2,24 @@ import appointmentModel from "@/app/models/appoitmentSchema";
 import dbConnect from "@/app/lib/databaseConnection";
 import { NextResponse } from "next/server";
 
+// Function to create a fetch with a timeout
+const fetchWithTimeout = (promise, timeout = 15000) => {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Request timed out')), timeout)
+    ),
+  ]);
+};
+
 export async function GET() {
   await dbConnect();
   try {
     // Limit the number of results and add projection for optimization
-    const getMessages = await appointmentModel.find().select('fieldsYouNeed').limit(100);
+    const fetchAppointments = appointmentModel.find().select('fieldsYouNeed').limit(100);
+    
+    // Set timeout for the fetch operation (e.g., 5 seconds)
+    const getMessages = await fetchWithTimeout(fetchAppointments, 5000);
     
     if (getMessages.length === 0) {
       return NextResponse.json(
@@ -31,9 +44,11 @@ export async function GET() {
     return NextResponse.json(
       {
         success: false,
-        message: "Error while retrieving appointments",
+        message: error.message === 'Request timed out' 
+          ? "The request has timed out. Please try again later." 
+          : "Error while retrieving appointments",
       },
-      { status: 500 }
+      { status: error.message === 'Request timed out' ? 408 : 500 }
     );
   }
 }
