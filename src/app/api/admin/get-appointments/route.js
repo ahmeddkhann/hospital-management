@@ -1,39 +1,36 @@
-
-import appointmentModel from "@/app/models/appoitmentSchema"
+import appointmentModel from "@/app/models/appoitmentSchema";
 import dbConnect from "@/app/lib/databaseConnection";
 
-export default async function handler(req, res) {
-    // Handle only GET requests
-    if (req.method !== 'GET') {
-        return res.status(405).json({
-            success: false,
-            message: "Method not allowed",
-        });
-    }
-
-    // Establish a database connection
-    await dbConnect();
-
-    try {
-        const getMessages = await appointmentModel.find();
-
-        if (!getMessages || getMessages.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: "No Appointments found",
-            });
+export async function GET (){
+    await dbConnect()
+     try {
+        const getMessages = await appointmentModel.find()
+        if (!getMessages){
+            return Response.json(
+                {
+                    success: false,
+                    message: "No Appointments found"
+                },
+                {status: 404}
+            )
         }
-
-        return res.status(200).json({
-            success: true,
-            message: "Appointments retrieved successfully",
-            data: getMessages,
-        });
-    } catch (error) {
-        console.error("Error while retrieving appointments:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Error while retrieving appointments",
-        });
-    }
+        return Response.json(
+            {
+                status: 200,
+                message: "Appointments retrived successfully",
+                getMessages
+            },
+            {status: 200}
+        )
+     } catch (error) {
+        console.log("error while retrieving appointments", error);
+        return Response.json(
+            {
+                success: false,
+                message: "Error while retrieving appointments",
+            },
+            {status: 500}
+        )
+        
+     }
 }
