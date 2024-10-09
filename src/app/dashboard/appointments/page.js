@@ -15,7 +15,7 @@ const ManageAppointments = () => {
     const fetchAppointments = async () => {
       try {
         console.log("Fetching appointments...");
-        const response = await axios.get("/api/admin/get-appointments"); // Ensure this matches your backend route
+        const response = await axios.get("/api/admin/get-appointments"); 
         const data = response.data; // Use this instead of response.json()
 
         if (response.status === 200) {
