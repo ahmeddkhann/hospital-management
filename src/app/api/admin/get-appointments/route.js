@@ -1,4 +1,4 @@
-import appointmentModel from "@/app/models/appointmentSchema"; // Corrected typo
+import appointmentModel from "@/app/models/appoitmentSchema";
 import dbConnect from "@/app/lib/databaseConnection";
 
 export async function GET() {
