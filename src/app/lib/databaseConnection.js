@@ -7,10 +7,11 @@ async function dbConnect() {
     }
 
     try {
-        const db = await mongoose.connect(`${process.env.MONGODB_URI}myDatabase`, {
+        const db = await mongoose.connect(`${process.env.MONGODB_URI}/myDatabase`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+        
         console.log("DB connected successfully");
     } catch (error) {
         console.error("Database connection failed: ", error);
