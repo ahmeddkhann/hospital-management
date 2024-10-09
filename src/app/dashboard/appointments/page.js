@@ -1,4 +1,5 @@
 "use client";
+// pages/manage-appointments.js
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
@@ -7,16 +8,18 @@ const ManageAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [updateMessage, setUpdateMessage] = useState(null);
 
   useEffect(() => {
+    // Fetch appointments data from the API
     const fetchAppointments = async () => {
       try {
         console.log("Fetching appointments...");
-        const response = await axios.get("/api/admin/get-appointments");
-        const data = response.data;
+        const response = await axios.get("/api/admin/get-appointments"); // Ensure this matches your backend route
+        const data = response.data; // Use this instead of response.json()
 
         if (response.status === 200) {
-          setAppointments(data.getMessages);
+          setAppointments(data.getMessages); // Set appointments data to state
         } else {
           setError(data.message || "Error fetching appointments");
         }
@@ -29,12 +32,48 @@ const ManageAppointments = () => {
           setError("Failed to fetch appointments");
         }
       } finally {
-        setLoading(false);
+        setLoading(false); // Hide loading state once the fetch is done
       }
     };
 
     fetchAppointments();
   }, []);
+
+  const updateAppointmentStatus = async (email, currentStatus) => {
+    const newStatus = prompt(
+      "Enter new status (Accepted, Rejected, etc.):",
+      currentStatus
+    );
+    if (!newStatus) return;
+
+    try {
+      const response = await fetch("/api/update-appointment", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, status: newStatus }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setUpdateMessage(data.message);
+        // Update the local state to reflect the change
+        setAppointments((prevAppointments) =>
+          prevAppointments.map((appointment) =>
+            appointment.email === email
+              ? { ...appointment, status: newStatus }
+              : appointment
+          )
+        );
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      alert("Failed to update appointment status");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
@@ -48,6 +87,10 @@ const ManageAppointments = () => {
         )}
         {error && <p className="text-center text-red-500 text-lg">{error}</p>}
 
+        {updateMessage && (
+          <p className="text-center text-green-500">{updateMessage}</p>
+        )}
+
         {!loading && !error && appointments.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {appointments.map((appointment) => (
@@ -57,22 +100,14 @@ const ManageAppointments = () => {
               >
                 <span className="font-semibold">Patient:</span>
                 <h3 className="text-xl font-semibold text-gray-800">
-                  {" "}
-                  {appointment.firstName} {appointment.lastName}{" "}
+                  {appointment.firstName} {appointment.lastName}
                 </h3>
-                {appointment.doctor ? (
-                  <div>
-                    <span className="font-semibold">Doctor:</span>
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {appointment.doctor.firstName}{" "}
-                      {appointment.doctor.lastName}
-                    </h3>
-                  </div>
-                ) : (
-                  <p className="text-red-500">
-                    Doctor information not available
-                  </p>
-                )}
+                <span className="font-semibold">Doctor:</span>
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {appointment.doctor
+                    ? `${appointment.doctor.firstName} ${appointment.doctor.lastName}`
+                    : "Doctor information not available"}
+                </h3>
                 <p className="text-lg font-semibold text-gray-600">
                   Email: {appointment.email}
                 </p>
