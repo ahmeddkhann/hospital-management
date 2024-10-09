@@ -1,12 +1,14 @@
-import appointmentModel from "@/app/models/appoitmentSchema";// Corrected typo: appoitmentSchema
+import appointmentModel from "@/app/models/appoitmentSchema";
 import dbConnect from "@/app/lib/databaseConnection";
-import { NextResponse } from "next/server"; // Import NextResponse
+import { NextResponse } from "next/server";
 
 export async function GET() {
   await dbConnect();
   try {
-    const getMessages = await appointmentModel.find();
-    if (getMessages.length === 0) { // Check for empty array
+    // Limit the number of results and add projection for optimization
+    const getMessages = await appointmentModel.find().select('fieldsYouNeed').limit(100);
+    
+    if (getMessages.length === 0) {
       return NextResponse.json(
         {
           success: false,
@@ -15,6 +17,7 @@ export async function GET() {
         { status: 404 }
       );
     }
+
     return NextResponse.json(
       {
         status: 200,
