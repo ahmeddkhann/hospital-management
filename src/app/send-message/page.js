@@ -12,20 +12,33 @@ const MessageForm = () => {
 
   const { toast } = useToast();
 
-  if (!firstName || !lastName || !email || !phone || !message){
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    // Check if all fields are filled
+    if (!firstName || !lastName || !email || !phone || !message) {
+      toast({
+        title: "Message not sent",
+        description: "Please fill in all fields",
+        status: "error",
+      });
+      return; // Exit if fields are empty
+    }
+
+    // Show success message
     toast({
-      title: "Message not sent",
-      description: "Please fill in all fields",
-      status: "error",
-    })
-  }
+      title: "Message Sent",
+      description: "Thank you for your feedback to EverCare Medical Centre.",
+      status: "success",
+    });
 
-  toast({
-    title: "Message Sent",
-    description: "Thankyou for your feedback to EverCare Medical Centre.",
-    status: "success",
-  });
-
+    // Reset form fields after submission (optional)
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPhone("");
+    setMessage("");
+  };
 
   return (
     <div className="bg-blue-50 p-8 rounded-lg shadow-lg max-w-lg mx-auto mt-10">
@@ -33,7 +46,7 @@ const MessageForm = () => {
         Give us a Feedback?
       </h2>
 
-      <form  className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col space-y-4">
           {/* First Name Input */}
           <input
