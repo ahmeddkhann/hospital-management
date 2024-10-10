@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
-import { useToast } from "@/hooks/use-toast";
 
 const MessageForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,46 +9,6 @@ const MessageForm = () => {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
-  const { toast } = useToast();
-
-  const handleMessage = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios
-        .post(
-          "/api/send-message",
-          { firstName, lastName, email, phone, message },
-          {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          toast({
-            title: "Message Sent",
-            description: res.data.message,
-            variant: "success",
-            duration: 4000,
-          });
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPhone("");
-          setMessage("");
-        });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive", // For error variant
-        duration: 4000,
-      });
-      console.error(error);
-    }
-  };
 
   return (
     <div className="bg-blue-50 p-8 rounded-lg shadow-lg max-w-lg mx-auto mt-10">
@@ -58,7 +16,7 @@ const MessageForm = () => {
         Give us a Feedback?
       </h2>
 
-      <form onSubmit={handleMessage} className="space-y-4">
+      <form  className="space-y-4">
         <div className="flex flex-col space-y-4">
           {/* First Name Input */}
           <input

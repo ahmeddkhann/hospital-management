@@ -15,52 +15,6 @@ export default function SignUp() {
   const [cnic, setCnic] = useState("");
   const [role, setRole] = useState("");
 
-  const { toast } = useToast(); // Access the toast function
-
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("/api/sign-up", {
-        firstName,
-        lastName,
-        email,
-        phone,
-        password,
-        gender,
-        dob,
-        cnic,
-        role,
-      });
-
-      // Show success toast on successful signup
-      toast({
-        title: "Sign Up Successful",
-        description: "Your account has been created successfully.",
-        status: "success", // Use the success style from shadcn
-      });
-
-      // Clear form fields after successful signup
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPhone("");
-      setPassword("");
-      setGender("");
-      setDob("");
-      setCnic("");
-      setRole("");
-    } catch (error) {
-      console.error(error);
-
-      // Show error toast on failed signup
-      toast({
-        title: "Sign Up Failed",
-        description:
-          "There was an error creating your account. Please try again.",
-        status: "error", // Use the error style from shadcn
-      });
-    }
-  };
 
   return (
     <div className="bg-blue-50 min-h-screen flex items-center justify-center">
@@ -70,7 +24,7 @@ export default function SignUp() {
             Sign Up
           </h1>
 
-          <form onSubmit={handleSignUp} className="space-y-4">
+          <form className="space-y-4">
             {/* First Name */}
             <input
               type="text"
