@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -13,6 +14,30 @@ export default function SignUp() {
   const [cnic, setCnic] = useState("");
   const [role, setRole] = useState("");
 
+  const { toast } = useToast();
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Check for missing fields
+    if (!firstName || !lastName || !email || !phone || !gender || !password || !dob || !cnic || !role) {
+      toast({
+        title: "Missing Fields",
+        description: "All fields are required!",
+        status: "error",
+      });
+      return; // Exit the function if there are missing fields
+    }
+
+    // Display success message if all fields are filled
+    toast({
+      title: "Sign Up Successful",
+      description: "You successfully signed up with EverCare Medical Centre.",
+      status: "success",
+    });
+
+    // Reset form or perform additional actions here, if needed
+  };
 
   return (
     <div className="bg-blue-50 min-h-screen flex items-center justify-center">
@@ -22,7 +47,7 @@ export default function SignUp() {
             Sign Up
           </h1>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {/* First Name */}
             <input
               type="text"
@@ -118,10 +143,9 @@ export default function SignUp() {
               <option value="" disabled>
                 Select Role
               </option>
-              <option value="patient">patient</option>
-              <option value="doctor">doctor</option>
-              <option value="admin">admin</option>
-
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="admin">Admin</option>
             </select>
 
             {/* Submit Button */}
@@ -139,7 +163,7 @@ export default function SignUp() {
                 href="/login"
                 className="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500 transition duration-300"
               >
-                LogIn
+                Log In
               </Link>
             </div>
           </form>

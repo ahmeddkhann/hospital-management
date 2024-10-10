@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const MessageForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,6 +9,22 @@ const MessageForm = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+
+  const { toast } = useToast();
+
+  if (!firstName || !lastName || !email || !phone || !message){
+    toast({
+      title: "Message not sent",
+      description: "Please fill in all fields",
+      status: "error",
+    })
+  }
+
+  toast({
+    title: "Message Sent",
+    description: "Thankyou for your feedback to EverCare Medical Centre.",
+    status: "success",
+  });
 
 
   return (

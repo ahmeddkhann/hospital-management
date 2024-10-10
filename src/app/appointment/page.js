@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 
@@ -22,52 +21,53 @@ export default function Appointment() {
 
   const { toast } = useToast(); // Use the toast hook
 
-  const handleAppointment = async (e) => {
+  const handleAppointment = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("/api/post-appointment", {
-        firstName,
-        lastName,
-        email,
-        phone,
-        cnic,
-        dob,
-        gender,
-        appointment_date: appointmentDate,
-        department,
-        doctor_firstName: doctorFirstName,
-        doctor_lastName: doctorLastName,
-        hasVisited,
-        address,
-      });
 
+    // Check for empty fields
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !cnic ||
+      !dob ||
+      !gender ||
+      !appointmentDate ||
+      !department ||
+      !doctorFirstName ||
+      !doctorLastName ||
+      !address
+    ) {
       toast({
-        title: "Appointment Scheduled",
-        description: response.data.message,
-        status: "success",
-      });
-
-      // Clear form fields
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPhone("");
-      setCnic("");
-      setDob("");
-      setGender("");
-      setAppointmentDate("");
-      setDepartment("");
-      setDoctorFirstName("");
-      setDoctorLastName("");
-      setHasVisited(false);
-      setAddress("");
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: error.response?.data?.message || "Something went wrong!",
+        title: "Missing Fields",
+        description: "All fields are required!",
         status: "error",
       });
+      return; // Exit the function if there are missing fields
     }
+
+    // If all fields are filled, show a success message
+    toast({
+      title: "Appointment Scheduled",
+      description: "Your appointment has been successfully scheduled.",
+      status: "success",
+    });
+
+    // Clear form fields
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPhone("");
+    setCnic("");
+    setDob("");
+    setGender("");
+    setAppointmentDate("");
+    setDepartment("");
+    setDoctorFirstName("");
+    setDoctorLastName("");
+    setHasVisited(false);
+    setAddress("");
   };
 
   return (
@@ -160,7 +160,7 @@ export default function Appointment() {
             <div className="flex flex-col mt-4">
               <span className="text-gray-700 mb-1">Appointment Date:</span>
               <input
-                type="text"
+                type="date"
                 value={appointmentDate}
                 onChange={(e) => setAppointmentDate(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -224,7 +224,7 @@ export default function Appointment() {
               <option value="Qadir">Qadir</option>
               <option value="Hassan">Hassan</option>
               <option value="Jaffar">Jaffar</option>
-              <option value="Bhatti ">Bhatti </option>
+              <option value="Bhatti">Bhatti </option>
               <option value="Butt">Butt</option>
             </select>
 
