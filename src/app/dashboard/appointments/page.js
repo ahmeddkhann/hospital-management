@@ -3,78 +3,47 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Server Action for fetching appointments
-async function fetchAppointments() {
-  const response = await fetch("/api/admin/get-appointments");
-  if (!response.ok) {
-    throw new Error("Failed to fetch appointments");
-  }
-  return response.json();
-}
-
-// Server Action for updating appointment status
-async function updateAppointmentStatus(email, newStatus) {
-  const response = await fetch("/api/update-appointment", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, status: newStatus }),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Failed to update appointment status");
-  }
-
-  return response.json();
-}
-
 const ManageAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [updateMessage, setUpdateMessage] = useState(null);
 
-  // Fetch appointments when the component mounts
+  // Simulated appointment data for demonstration
+  const simulatedAppointments = [
+    {
+      _id: "1",
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@example.com",
+      department: "Cardiology",
+      status: "Pending",
+      appointment_date: "2024-10-15T09:00:00Z",
+      hasVisited: true,
+      doctor: { firstName: "Alice", lastName: "Smith" },
+    },
+    {
+      _id: "2",
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane@example.com",
+      department: "Neurology",
+      status: "Accepted",
+      appointment_date: "2024-10-18T11:00:00Z",
+      hasVisited: false,
+      doctor: { firstName: "Bob", lastName: "Brown" },
+    },
+  ];
+
+  // Simulate loading appointments
   useEffect(() => {
-    const loadAppointments = async () => {
-      try {
-        const data = await fetchAppointments();
-        setAppointments(data.getMessages); // Set appointments data to state
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    const loadAppointments = () => {
+      setAppointments(simulatedAppointments); // Set appointments to simulated data
+      setLoading(false);
     };
 
     loadAppointments();
   }, []);
-
-  // Handle updating appointment status
-  const handleUpdateAppointmentStatus = async (email, currentStatus) => {
-    const newStatus = prompt(
-      "Enter new status (Accepted, Rejected, etc.):",
-      currentStatus
-    );
-    if (!newStatus) return;
-
-    try {
-      const data = await updateAppointmentStatus(email, newStatus);
-      setUpdateMessage(data.message);
-      // Update the local state to reflect the change
-      setAppointments((prevAppointments) =>
-        prevAppointments.map((appointment) =>
-          appointment.email === email
-            ? { ...appointment, status: newStatus }
-            : appointment
-        )
-      );
-    } catch (err) {
-      alert(err.message);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
@@ -124,12 +93,7 @@ const ManageAppointments = () => {
                 <p className="text-lg font-semibold text-gray-600">
                   Has Visited Before? {appointment.hasVisited ? "Yes" : "No"}
                 </p>
-                <button
-                  onClick={() => handleUpdateAppointmentStatus(appointment.email, appointment.status)}
-                  className="mt-4 bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 transition duration-300"
-                >
-                  Update Status
-                </button>
+                {/* Remove update status button */}
                 <Link href={`/dashboard/appointments/delete?email=${appointment.email}`}>
                   <button className="mt-4 bg-red-500 text-white rounded-lg py-2 px-4 hover:bg-red-600 transition duration-300">
                     Delete Appointment
