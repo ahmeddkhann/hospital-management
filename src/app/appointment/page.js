@@ -41,33 +41,30 @@ export default function Appointment() {
         address,
       });
 
-      if (response.data.success) {
-        toast({
-          title: "Appointment Scheduled",
-          description: response.data.message,
-          status: "success",
-        });
-
-        // Clear form fields
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPhone("");
-        setCnic("");
-        setDob("");
-        setGender("");
-        setAppointmentDate("");
-        setDepartment("");
-        setDoctorFirstName("");
-        setDoctorLastName("");
-        setHasVisited(false);
-        setAddress("");
-      }
-    } catch (error) {
-      console.error(error);
       toast({
-        title: "Appointment Scheduling Failed",
-        description: error.response?.data?.message || "An error occurred.",
+        title: "Appointment Scheduled",
+        description: response.data.message,
+        status: "success",
+      });
+
+      // Clear form fields
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setCnic("");
+      setDob("");
+      setGender("");
+      setAppointmentDate("");
+      setDepartment("");
+      setDoctorFirstName("");
+      setDoctorLastName("");
+      setHasVisited(false);
+      setAddress("");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.response?.data?.message || "Something went wrong!",
         status: "error",
       });
     }
@@ -133,8 +130,6 @@ export default function Appointment() {
             />
 
             {/* Date of Birth */}
-
-            {/* Date of Birth */}
             <div className="flex flex-col">
               <span className="text-gray-700 mb-1">Date of Birth:</span>
               <input
@@ -147,21 +142,19 @@ export default function Appointment() {
             </div>
 
             {/* Gender */}
-         
-              <select
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="" disabled>
-                  Select Gender
-                </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-     
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="" disabled>
+                Select Gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="Other">Other</option>
+            </select>
 
             {/* Appointment Date */}
             <div className="flex flex-col mt-4">
@@ -177,63 +170,63 @@ export default function Appointment() {
 
             {/* Department */}
             <select
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="" disabled>
-                  Select Department
-                </option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedic">Orthopedic</option>
-                <option value="Neurology">Neurology</option>
-                <option value="Radiology">Radiology</option>
-                <option value="Gynecology">Gynecology</option>
-                <option value="Endocrinology">Endocrinology </option>
-                <option value="Urology">Urology</option>
-              </select>
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="" disabled>
+                Select Department
+              </option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Orthopedic">Orthopedic</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Radiology">Radiology</option>
+              <option value="Gynecology">Gynecology</option>
+              <option value="Endocrinology">Endocrinology </option>
+              <option value="Urology">Urology</option>
+            </select>
 
             {/* Doctor's First Name */}
             <select
-                value={doctorFirstName}
-                onChange={(e) => setDoctorFirstName(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="" disabled>
-                  Doctor First Name
-                </option>
-                <option value="ahmed">ahmed</option>
-                <option value="Yahya">Yahya</option>
-                <option value="Waseem">Waseem</option>
-                <option value="Qadir">Qadir</option>
-                <option value="Maryam">Maryam</option>
-                <option value="Wania">Wania</option>
-                <option value="Jamal">Jamal </option>
-                <option value="Habibullah">Habibullah</option>
-              </select>
+              value={doctorFirstName}
+              onChange={(e) => setDoctorFirstName(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="" disabled>
+                Doctor First Name
+              </option>
+              <option value="ahmed">ahmed</option>
+              <option value="Yahya">Yahya</option>
+              <option value="Waseem">Waseem</option>
+              <option value="Qadir">Qadir</option>
+              <option value="Maryam">Maryam</option>
+              <option value="Wania">Wania</option>
+              <option value="Jamal">Jamal </option>
+              <option value="Habibullah">Habibullah</option>
+            </select>
 
             {/* Doctor's Last Name */}
             <select
-                value={doctorLastName}
-                onChange={(e) => setDoctorLastName(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="" disabled>
-                  Doctor Last Name
-                </option>
-                <option value="Ahmed">Ahmed</option>
-                <option value="khan">khan</option>
-                <option value="Haider">Haider</option>
-                <option value="Qadir">Qadir</option>
-                <option value="Hassan">Hassan</option>
-                <option value="Jaffar">Jaffar</option>
-                <option value="Bhatti ">Bhatti </option>
-                <option value="Butt">Butt</option>
-              </select>
+              value={doctorLastName}
+              onChange={(e) => setDoctorLastName(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="" disabled>
+                Doctor Last Name
+              </option>
+              <option value="Ahmed">Ahmed</option>
+              <option value="khan">khan</option>
+              <option value="Haider">Haider</option>
+              <option value="Qadir">Qadir</option>
+              <option value="Hassan">Hassan</option>
+              <option value="Jaffar">Jaffar</option>
+              <option value="Bhatti ">Bhatti </option>
+              <option value="Butt">Butt</option>
+            </select>
 
             {/* Has Visited Before */}
             <div className="flex items-center mb-4">
@@ -265,9 +258,7 @@ export default function Appointment() {
           </form>
 
           <div className="flex flex-col items-center mt-8">
-            <h1 className="text-lg font-medium text-gray-700 mb-4">
-              Need Help?
-            </h1>
+            <h1 className="text-lg font-medium text-gray-700 mb-4">Need Help?</h1>
             <Link
               href="/send-message"
               className="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500 transition duration-300"

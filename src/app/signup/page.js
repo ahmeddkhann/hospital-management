@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
-import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 
 export default function SignUp() {
