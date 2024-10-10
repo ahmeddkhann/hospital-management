@@ -1,5 +1,5 @@
 "use client";
-// pages/manage-appointments.js
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
