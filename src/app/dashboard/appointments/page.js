@@ -15,7 +15,6 @@ const ManageAppointments = () => {
       try {
         console.log("Fetching appointments...");
         
-        // Set a timeout for the API call
         const response = await axios.get("/api/admin/get-appointments", {
           timeout: 5000, // 5 seconds timeout
         });
