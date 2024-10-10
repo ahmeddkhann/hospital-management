@@ -1,5 +1,5 @@
 // app/api/admin/get-appointments/route.js
-import appointmentModel from "@/app/models/appointmentSchema";
+import appointmentModel from "@/app/models/appoitmentSchema";
 import dbConnect from "@/app/lib/databaseConnection";
 
 export async function GET() {
