@@ -25,23 +25,14 @@ export default function Login() {
       return;
     }
 
-    try {
-      const res = await axios.post("/api/sign-in", { email, password, role }); // Include role in the login request
-
+  
       toast({
         title: "Login Successful",
-        description: "You have successfully logged in.",
+        description: "You have successfully logged in. You can set your appointment now",
         status: "success",
       });
 
       // Handle login logic here
-    } catch (error) {
-      toast({
-        title: "Login Failed",
-        description: "Invalid credentials. Please try again.",
-        status: "error",
-      });
-    }
   };
 
   return (
