@@ -51,9 +51,9 @@ export default function Navbar() {
         <div className="md:hidden bg-blue-600 text-white space-y-4 p-4">
           <Link href="/" className="block hover:text-gray-300">Home</Link>
           <Link href="/departments" className="block hover:text-gray-300">Departments</Link>
-          <Link href="/send-message" className="block hover:text-gray-300">Send Message</Link>
-          <Link href="/signup" className="block hover:text-gray-300">Signup</Link>
-          <Link href="/login" className="block hover:text-gray-300">Log In</Link>
+          <Link href="/appointment" className="block hover:text-gray-300">Appointment</Link>
+          <Link href="/send-message" className="block hover:text-gray-300">Feedback</Link>
+          <Link href="/adminPanel" className="block hover:text-gray-300">Admin</Link>
         </div>
       )}
     </nav>
